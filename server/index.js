@@ -43,7 +43,7 @@ app.post('/api/contato', async (req, res, next) => {
   try {
     await transporter.sendMail({
       from: gmailUser,
-      to: 'luu_colombo@hotmail.com',
+      to: 'flowup.digital2@gmail.com',
       replyTo: emailS,
       subject: 'Contato - FlowUp',
       text: `Nome: ${nomeS}\nE-mail: ${emailS}\nTelefone: ${telefoneS}\n\nMensagem:\n${mensagemS}`,

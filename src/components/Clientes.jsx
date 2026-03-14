@@ -8,24 +8,24 @@ import CardActionArea from '@mui/material/CardActionArea'
 
 const clientes = [
   {
-    nome: 'Doce Lembrança',
+    nome: 'Óptica Zarth',
     depoimento: 'A FlowUp transformou nossa presença digital. As vendas aumentaram muito e hoje conseguimos alcançar muito mais clientes.',
-    handle: '@personalizadosdocelembranca',
-    username: 'personalizadosdocelembranca',
-    imgurl: 'img/doce.jpg',
-    url: 'https://www.instagram.com/personalizadosdocelembranca',
+    handle: '@opticazarth',
+    username: 'opticazarth',
+    imgurl: 'img/zarth.jpg',
+    url: 'https://www.instagram.com/opticazarth',
   },
   {
-    nome: 'Alegra Kids',
+    nome: 'Optica Exclusive',
     depoimento: 'O trabalho da equipe foi incrível. Nossas vendas cresceram de forma que não imaginávamos. Super indicamos!',
-    handle: '@ale.grakids',
-    username: 'ale.grakids',
-    imgurl: 'img/alegra.jpg',
-    url: 'https://www.instagram.com/ale.grakids',
+    handle: '@opticaexclusivers',
+    username: 'opticaexclusivers',
+    imgurl: 'img/exclusivers.jpg',
+    url: 'https://www.instagram.com/opticaexclusivers',
   },
   {
     nome: 'Cubo Play',
-    depoimento: 'A FlowUp nos ajudou a fortalecer nossa presença nas redes e a alcançar mais famílias. Resultados que falam por si.',
+    depoimento: 'A FlowUp criou nosso site profissional, transmitindo a essência da nossa marca e facilitando que mais famílias nos encontrem online.',
     handle: '@cubo.play',
     username: 'cubo.play',
     imgurl: 'img/cubo.jpg',
@@ -33,7 +33,7 @@ const clientes = [
   },
   {
     nome: 'Realizar Financiamentos',
-    depoimento: 'Ganhamos credibilidade e visibilidade no digital. A estratégia da FlowUp trouxe mais oportunidades e clientes qualificados.',
+    depoimento: 'A FlowUp desenvolveu nosso site e a gestão dos leads. Hoje centralizamos as solicitações de forma organizada e convertemos mais clientes.',
     handle: '@realizarfinanciamentos',
     username: 'realizarfinanciamentos',
     imgurl: 'img/realizar.jpg',
@@ -41,7 +41,7 @@ const clientes = [
   },
   {
     nome: 'Comer Bem',
-    depoimento: 'A divulgação do nosso app nas redes ganhou outro nível. Mais pessoas conhecem o Comer Bem e baixam o aplicativo graças ao trabalho da equipe.',
+    depoimento: 'A FlowUp criou nosso aplicativo do zero. Interface intuitiva, experiência fluida e hoje nossos usuários têm tudo na palma da mão.',
     handle: '',
     username: 'comerbem',
     imgurl: 'img/comerbem.webp',

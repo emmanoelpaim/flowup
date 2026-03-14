@@ -12,13 +12,13 @@ const slides = [
     target: 'servicos',
     image: `${import.meta.env.BASE_URL}img/banner1.jpeg`,
   },
-  {
+  /*{
     title: 'Tráfego pago e orgânico que converte',
     subtitle: 'Google Ads, Meta Ads e SEO para levar mais clientes até você.',
     cta: 'Fale com a gente',
     target: 'contato',
     image: `${import.meta.env.BASE_URL}img/banner2.jpeg`,
-  },
+  },*/
   {
     title: 'Dados e criatividade trabalhando juntos',
     subtitle: 'Análise e conteúdo para decisões mais inteligentes.',

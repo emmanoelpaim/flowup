@@ -80,7 +80,7 @@ export default function FaleConosco() {
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
                 <Email color="secondary" />
-                <Typography>contato@flowup.com.br</Typography>
+                <Typography>flowup.digital2@gmail.com</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
                 <LocationOn color="secondary" />
