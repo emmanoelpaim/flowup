@@ -119,7 +119,7 @@ export default function App() {
       </main>
       <Box
         component="a"
-        href="https://wa.me/5551995794128"
+        href="https://wa.me/5551980305426"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"
