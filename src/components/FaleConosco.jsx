@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
@@ -9,7 +10,6 @@ import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
 import Instagram from '@mui/icons-material/Instagram'
 import Email from '@mui/icons-material/Email'
-import Phone from '@mui/icons-material/Phone'
 import LocationOn from '@mui/icons-material/LocationOn'
 
 function maskTelefone(value) {
@@ -20,7 +20,16 @@ function maskTelefone(value) {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
 }
 
+const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''
+
+function urlContato() {
+  const base = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/$/, '')
+  if (base) return `${base}/api/contato`
+  return '/api/contato'
+}
+
 export default function FaleConosco() {
+  const recaptchaRef = useRef(null)
   const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' })
   const [status, setStatus] = useState({ tipo: null, texto: '' })
   const [enviando, setEnviando] = useState(false)
@@ -37,12 +46,20 @@ export default function FaleConosco() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus({ tipo: null, texto: '' })
+    let recaptchaToken = ''
+    if (recaptchaSiteKey) {
+      recaptchaToken = recaptchaRef.current?.getValue() || ''
+      if (!recaptchaToken) {
+        setStatus({ tipo: 'erro', texto: 'Confirme o reCAPTCHA antes de enviar.' })
+        return
+      }
+    }
     setEnviando(true)
     try {
-      const res = await fetch('/api/contato', {
+      const res = await fetch(urlContato(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify({ ...form, recaptchaToken })
       })
       let data
       try {
@@ -53,6 +70,7 @@ export default function FaleConosco() {
       if (data.ok) {
         setStatus({ tipo: 'sucesso', texto: 'Mensagem enviada com sucesso. Retornaremos em breve!' })
         setForm({ nome: '', email: '', telefone: '', mensagem: '' })
+        recaptchaRef.current?.reset()
       } else {
         setStatus({ tipo: 'erro', texto: data.erro || 'Erro ao enviar. Tente novamente.' })
       }
@@ -88,7 +106,7 @@ export default function FaleConosco() {
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Instagram color="secondary" />
-                <Link href="https://instagram.com/flowupdigital" target="_blank" rel="noopener noreferrer" color="text.secondary" underline="hover">
+                <Link href="https://instagram.com/flowup.digital" target="_blank" rel="noopener noreferrer" color="text.secondary" underline="hover">
                   @flowupdigital
                 </Link>
               </Box>
@@ -109,6 +127,11 @@ export default function FaleConosco() {
                 <Grid item xs={12}>
                   <TextField fullWidth label="Mensagem" name="mensagem" value={form.mensagem} onChange={handleChange} multiline rows={4} required />
                 </Grid>
+                {recaptchaSiteKey && (
+                  <Grid item xs={12}>
+                    <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaSiteKey} />
+                  </Grid>
+                )}
                 {status.texto && (
                   <Grid item xs={12}>
                     <Typography color={status.tipo === 'sucesso' ? 'success.main' : 'error.main'}>

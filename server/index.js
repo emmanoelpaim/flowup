@@ -17,6 +17,25 @@ app.use(express.json())
 
 const gmailUser = process.env.GMAIL_USER?.trim()
 const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, '')?.trim()
+const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY?.trim()
+
+async function verificarRecaptcha(token) {
+  if (!recaptchaSecret) return { ok: true }
+  if (!token || typeof token !== 'string') {
+    return { ok: false, erro: 'Confirme o reCAPTCHA.' }
+  }
+  const params = new URLSearchParams()
+  params.set('secret', recaptchaSecret)
+  params.set('response', token)
+  const r = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params
+  })
+  const data = await r.json()
+  if (data.success) return { ok: true }
+  return { ok: false, erro: 'reCAPTCHA inválido. Tente novamente.' }
+}
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -29,9 +48,13 @@ const transporter = nodemailer.createTransport({
 })
 
 app.post('/api/contato', async (req, res, next) => {
-  const { nome, email, telefone, mensagem } = req.body || {}
+  const { nome, email, telefone, mensagem, recaptchaToken } = req.body || {}
   if (!nome || !email || !mensagem) {
     return res.status(400).json({ ok: false, erro: 'Nome, e-mail e mensagem são obrigatórios.' })
+  }
+  const recaptchaResult = await verificarRecaptcha(recaptchaToken)
+  if (!recaptchaResult.ok) {
+    return res.status(400).json({ ok: false, erro: recaptchaResult.erro })
   }
   if (!gmailUser || !gmailPass) {
     return res.status(500).json({ ok: false, erro: 'Servidor sem configuração de e-mail.' })
