@@ -34,7 +34,7 @@ const team = [
     name: 'Emmanoel Paim',
     role: 'Desenvolvimento de Aplicações',
     initials: 'EP',
-    avatar: 'img/manu.jpeg',
+    avatar: 'img/manu.jpg',
     linkedIn: 'https://www.linkedin.com/in/emmanoel-da-silva-soares-paim/',
     bio: 'Desenvolve soluções digitais e aplicações que tornam os processos das marcas mais eficientes e escaláveis.',
     skills: 'Desenvolvimento · Tecnologia · Inovação',

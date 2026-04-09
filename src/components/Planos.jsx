@@ -6,9 +6,6 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 
 export default function Planos() {
-  const discountPercent = 50
-  const parsePrice = (str) => parseInt(str.replace(/[^\d]/g, ''), 10)
-  const formatPrice = (num) => `R$ ${num.toLocaleString('pt-BR')}/mês`
   const plans = [
     {
       title: 'Starter Content',
@@ -84,6 +81,7 @@ export default function Planos() {
           {plans.map((plan, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Box sx={{ position: 'relative', height: '100%', overflow: 'hidden', borderRadius: '12px' }}>
+                {/*
                 <Box
                   sx={{
                     position: 'absolute',
@@ -103,6 +101,7 @@ export default function Planos() {
                     {discountPercent}% OFF
                   </Typography>
                 </Box>
+                */}
                 <Card
                   sx={{
                     height: '100%',
@@ -125,20 +124,6 @@ export default function Planos() {
                     <Typography variant="h6" gutterBottom>
                       {plan.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      De
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                      {plan.price}
-                    </Typography>
-                    <Box component="p" sx={{ m: 0, mb: 1 }}>
-                      <Typography component="span" variant="body2" color="text.secondary" sx={{ mr: 0.5 }}>
-                        por
-                      </Typography>
-                      <Typography component="span" variant="h5" fontWeight={700} sx={{ color: (theme) => theme.palette.mode === 'dark' ? '#fff' : 'primary.main' }}>
-                        {formatPrice(Math.round(parsePrice(plan.price) * (1 - discountPercent / 100)))}
-                      </Typography>
-                    </Box>
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                       {plan.description}
                     </Typography>
