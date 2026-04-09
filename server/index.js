@@ -12,8 +12,17 @@ import nodemailer from 'nodemailer'
 const app = express()
 const PORT = process.env.PORT || 3001
 
-app.use(cors())
+app.use(cors({
+  origin: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept'],
+  maxAge: 86400
+}))
 app.use(express.json())
+
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true })
+})
 
 const gmailUser = process.env.GMAIL_USER?.trim()
 const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, '')?.trim()

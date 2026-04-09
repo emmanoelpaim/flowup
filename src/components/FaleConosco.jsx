@@ -90,7 +90,15 @@ function FaleConoscoForm({ getRecaptchaToken }) {
         setStatus({ tipo: 'erro', texto: data.erro || 'Erro ao enviar. Tente novamente.' })
       }
     } catch {
-      setStatus({ tipo: 'erro', texto: 'Erro de conexão. Verifique se o servidor está rodando.' })
+      const apiUrl = (import.meta.env.VITE_API_BASE_URL || '').trim()
+      const prod = import.meta.env.PROD
+      let msg = 'Não foi possível conectar à API. Verifique se o backend está no ar, se a URL está correta (HTTPS) e se o domínio do site está liberado no servidor.'
+      if (prod && !apiUrl) {
+        msg = 'O formulário precisa da URL da API no build. No GitHub, defina VITE_API_BASE_URL (ex.: https://api.seudominio.com) no ambiente do workflow e faça um novo deploy.'
+      } else if (!prod && !apiUrl) {
+        msg = 'Servidor local não respondeu. Na pasta do projeto, rode npm run start (front + API) ou em outro terminal: cd server && npm start (porta 3001).'
+      }
+      setStatus({ tipo: 'erro', texto: msg })
     } finally {
       setEnviando(false)
     }
