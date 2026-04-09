@@ -68,12 +68,6 @@ export default function SiteNav() {
               </IconButton>
             ) : (
               <>
-                <Button color="inherit" component="a" href={`${base}linktree`}>
-                  Link Tree
-                </Button>
-                <Button color="inherit" component="a" href={`${base}lgpd`}>
-                  LGPD
-                </Button>
                 {siteNavItems.map((item) => (
                   <Button key={item.id} color="inherit" component="a" href={sectionHref(item.id)}>
                     {item.label}
@@ -86,16 +80,6 @@ export default function SiteNav() {
       </AppBar>
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <List sx={{ width: 260, pt: 2 }}>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href={`${base}linktree`} onClick={() => setDrawerOpen(false)}>
-              <ListItemText primary="Link Tree" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href={`${base}lgpd`} onClick={() => setDrawerOpen(false)}>
-              <ListItemText primary="LGPD" />
-            </ListItemButton>
-          </ListItem>
           {siteNavItems.map((item) => (
             <ListItem key={item.id} disablePadding>
               <ListItemButton component="a" href={sectionHref(item.id)} onClick={() => setDrawerOpen(false)}>

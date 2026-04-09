@@ -11,6 +11,8 @@ import Link from '@mui/material/Link'
 import Instagram from '@mui/icons-material/Instagram'
 import Email from '@mui/icons-material/Email'
 import LocationOn from '@mui/icons-material/LocationOn'
+import LinkIcon from '@mui/icons-material/Link'
+import PolicyIcon from '@mui/icons-material/Policy'
 
 function maskTelefone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11)
@@ -21,6 +23,7 @@ function maskTelefone(value) {
 }
 
 const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''
+const baseUrl = import.meta.env.BASE_URL
 
 function urlContato() {
   const base = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/$/, '')
@@ -104,10 +107,22 @@ export default function FaleConosco() {
                 <LocationOn color="secondary" />
                 <Typography>Rio Grande do Sul, Brasil</Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
                 <Instagram color="secondary" />
                 <Link href="https://instagram.com/flowup.digital" target="_blank" rel="noopener noreferrer" color="text.secondary" underline="hover">
                   @flowupdigital
+                </Link>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
+                <LinkIcon color="secondary" />
+                <Link component="a" href={`${baseUrl}linktree`} color="text.secondary" underline="hover">
+                  Link Tree
+                </Link>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <PolicyIcon color="secondary" />
+                <Link component="a" href={`${baseUrl}lgpd`} color="text.secondary" underline="hover">
+                  LGPD
                 </Link>
               </Box>
             </Paper>

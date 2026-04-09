@@ -12,6 +12,13 @@ const slides = [
     target: 'servicos',
     image: `${import.meta.env.BASE_URL}img/banner1.jpeg`,
   },
+  {
+    title: 'Indique e Ganhe',
+    subtitle: 'Indique a FlowUp e ganhe benefícios ao conectar novos clientes ao nosso time.',
+    cta: 'Mais informações',
+    target: 'contato',
+    image: `${import.meta.env.BASE_URL}img/banner2.jpeg`,
+  },
   /*{
     title: 'Tráfego pago e orgânico que converte',
     subtitle: 'Google Ads, Meta Ads e SEO para levar mais clientes até você.',
@@ -36,13 +43,25 @@ export default function Banner() {
     return () => clearInterval(t)
   }, [])
 
+  useEffect(() => {
+    slides.forEach((s) => {
+      if (s.image) {
+        const img = new Image()
+        img.src = s.image
+      }
+    })
+  }, [])
+
   const slide = slides[index]
 
   return (
     <Box
       sx={{
-        minHeight: { xs: 70, md: 85 },
-        py: { xs: 8, md: 12 },
+        width: '100%',
+        boxSizing: 'border-box',
+        height: { xs: 'clamp(440px, 78vh, 640px)', md: 'clamp(480px, 72vh, 720px)' },
+        minHeight: { xs: 'clamp(440px, 78vh, 640px)', md: 'clamp(480px, 72vh, 720px)' },
+        py: { xs: 6, md: 8 },
         px: 2,
         display: 'flex',
         alignItems: 'center',
@@ -51,11 +70,14 @@ export default function Banner() {
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
+        flexShrink: 0,
+        bgcolor: '#235F45',
         backgroundImage: slide.image
           ? `linear-gradient(135deg, ${alpha('#235F45', 0.88)} 0%, ${alpha('#235F45', 0.75)} 50%, ${alpha('#C7E1D1', 0.8)} 100%), url(${slide.image})`
           : `linear-gradient(135deg, ${alpha('#235F45', 0.92)} 0%, ${alpha('#C7E1D1', 0.85)} 100%)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <Box sx={{ position: 'relative', zIndex: 1, maxWidth: 720 }}>
