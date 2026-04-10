@@ -8,12 +8,14 @@ import NossaEquipe from './components/NossaEquipe'
 import FaleConosco from './components/FaleConosco'
 import LinkTreePage from './components/LinkTreePage'
 import LgpdPage from './components/LgpdPage'
+import RegulamentoIndiqueGanhe from './components/RegulamentoIndiqueGanhe'
 import CookieConsentBanner from './components/CookieConsentBanner'
 import SiteNav from './components/SiteNav'
 
 export default function App() {
   const isLinkTreePage = window.location.pathname.endsWith('/linktree')
   const isLgpdPage = window.location.pathname.endsWith('/lgpd')
+  const isRegulamentoIndiqueGanhe = window.location.pathname.endsWith('/regulamento-indique-ganhe')
 
   return (
     <>
@@ -22,6 +24,8 @@ export default function App() {
         <LinkTreePage />
       ) : isLgpdPage ? (
         <LgpdPage />
+      ) : isRegulamentoIndiqueGanhe ? (
+        <RegulamentoIndiqueGanhe />
       ) : (
         <main>
           <section id="banner">
